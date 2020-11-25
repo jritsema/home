@@ -1,0 +1,62 @@
+# create a new directory and change to it
+mcd () {
+  mkdir -p $1
+  cd $1
+}
+
+random() {
+  cat /dev/urandom | base64 | tr -dc '0-9a-zA-Z' | head -c15 | sed 's/$/\n/'
+}
+
+function taocl() {
+  curl -s https://raw.githubusercontent.com/jlevy/the-art-of-command-line/master/README.md |
+    sed '/cowsay[.]png/d' |
+    pandoc -f markdown -t html |
+    xmlstarlet fo --html --dropdtd |
+    xmlstarlet sel -t -v "(html/body/ul/li[count(p)>0])[$RANDOM mod last()+1]" |
+    xmlstarlet unesc | fmt -80 | iconv -t US
+}
+
+function gittag() {
+  git tag -a $1 -m "$1" $2
+}
+
+function flogsjson() {
+  fargate service logs -f --start -$1m | awk '{$1=""; print}'
+}
+
+
+#######
+# aws #
+#######
+
+function awsprofiles() {
+  cat $HOME/.aws/credentials | grep ]
+}
+
+function awsprofile() {
+  env | grep AWS_PROFILE
+}
+
+function setawsprofile() {
+
+  # locate profile in credentials file
+  profile=$(cat $HOME/.aws/credentials | grep -m1 $1)
+
+  # strip leading/trailing brackets []
+  result=${profile#"["}
+  result=${result%"]"}
+
+  # export profile
+  export AWS_PROFILE=${result}
+
+  # show current
+  awsprofile
+}
+
+s3ls() {
+  aws s3 ls --recursive --human-readable --summarize $1
+}
+
+prompt_aws() {}
+prompt_context() {}

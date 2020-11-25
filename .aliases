@@ -1,0 +1,62 @@
+# shell
+alias ll='ls -al'
+alias h=history
+alias searchhistory='history | fzf --tac'
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+alias macports='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
+# docker
+alias dls='docker ps -a'
+alias dockerps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
+alias dc=docker-compose
+
+# git
+alias push='git push origin master'
+alias push-main='git push origin main'
+alias pull='git pull origin master'
+alias pull-main='git pull origin main'
+alias master='git checkout master'
+alias main='git checkout main'
+alias develop='git checkout develop'
+alias pull-develop='git pull origin develop'
+alias lastcommit='git l | head -1'
+alias cdr='cd $(git rev-parse --show-toplevel)'
+alias gca='git commit -a -v --status'
+
+# aws
+alias gimme-aws-creds='docker run -it --rm -v ~/.aws/credentials:/root/.aws/credentials -v ~/.okta_aws_login_config:/root/.okta_aws_login_config gimme-aws-creds'
+
+# k8s
+alias k=kubectl
+
+# fargate
+alias fc=fargate-create
+alias f=fargate
+alias fevents='watch "fargate service info | grep -A 5 Events"'
+alias fsi="watch fargate service info"
+alias flogs="fargate service logs --start -10m -T --no-prefix -f"
+alias containers='watch "fargate service info | grep -A 4 Service"'
+alias ecrlogin='login=$(aws ecr get-login --no-include-email) && eval "$login"'
+
+# terraform
+alias tf='terraform'
+alias tfa="terraform init && terraform apply -auto-approve=true"
+alias tfinspect='terraform state list | fzf | xargs terraform state show'
+alias tfsummary='terraform plan | grep " resource "'
+
+# contentai
+alias contentailocal='rm ~/.contentai/config && ln -s ~/.contentai/local ~/.contentai/config && ll ~/.contentai && cat ~/.contentai/config'
+alias contentailocal-docker='rm ~/.contentai/config && ln -s ~/.contentai/local-docker ~/.contentai/config && ll ~/.contentai && cat ~/.contentai/config'
+alias contentaidev='rm ~/.contentai/config && ln -s ~/.contentai/dev ~/.contentai/config && ll ~/.contentai && cat ~/.contentai/config'
+alias contentaiprod='rm ~/.contentai/config && ln -s ~/.contentai/prod ~/.contentai/config && ll ~/.contentai && cat ~/.contentai/config'
+alias cai=contentai
+alias caijobs='watch -n 30 "contentai jobs | head"'
+alias caibatchjobs='watch -n 30 "contentai batch list | head"'
+alias caiuserjobs='contentai jobs | grep -v Ritsema | grep -v Havird | less'
+
+# python
+alias py=python
+
+# other
+alias psql='docker run -it --rm --net host -v $PWD/:/scripts -e HOSTNAME=localhost -e PGDATABASE=postgres -e PGUSERNAME=postgres -e PGPASSWORD=example psql'
