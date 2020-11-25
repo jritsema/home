@@ -1,6 +1,6 @@
 ### dotfiles
 
-```
+```sh
 git clone --bare git@github.com:jritsema/dotfiles.git $HOME/.cfg
 function config {
    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
@@ -19,7 +19,7 @@ config config status.showUntrackedFiles no
 
 vim plugins
 
-```
+```sh
 git clone https://github.com/preservim/nerdtree.git $HOME/.vim/pack/plugins/start/nerdtree
 git clone https://github.com/frazrepo/vim-rainbow.git $HOME/.vim/pack/plugins/start/vim-rainbow
 git clone https://github.com/fatih/vim-go.git $HOME/.vim/pack/plugins/start/vim-go
