@@ -1,0 +1,26 @@
+[core]
+	editor = vim
+	autocrlf = false
+
+[alias]
+	s = status
+	ci = commit
+	co = checkout
+	br = branch
+	unstage = reset HEAD --
+	undo =  reset HEAD~1
+	last = log -1 HEAD
+	l = log --abbrev-commit --pretty=oneline
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	sq = merge --squash
+	examine-commit = diff-tree --no-commit-id --name-only -r
+	tree = log --oneline --decorate --all --graph
+	pushtags = push origin master --tags
+
+[init]
+	defaultBranch = main
+[user]
+	name = John Ritsema
+	email = john_ritsema@yahoo.com
+[github]
+	user = jritsema

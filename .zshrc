@@ -91,8 +91,13 @@ export EDITOR=vim
 #
 alias zshconfig="vim ~/.zshrc"
 
-source $HOME/.aliases
-source $HOME/.functions
+# source other files
+for file in $HOME/.{aliases,functions,extra}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		source "$file"
+	fi
+done
+unset file
 
 export PATH=/usr/local/bin:$PATH
 
