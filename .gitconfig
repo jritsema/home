@@ -19,8 +19,3 @@
 
 [init]
 	defaultBranch = main
-[user]
-	name = John Ritsema
-	email = john_ritsema@yahoo.com
-[github]
-	user = jritsema
