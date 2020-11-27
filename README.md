@@ -1,7 +1,7 @@
 ### dotfiles
 
 ```sh
-git clone --bare git@github.com:jritsema/dotfiles.git $HOME/.cfg
+git clone --bare https://github.com/jritsema/dotfiles.git $HOME/.cfg
 function config {
    /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
 }
