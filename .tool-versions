@@ -1,0 +1,4 @@
+direnv 2.20.0 
+golang 1.15.5
+nodejs 14.15.1
+terraform 0.13.5

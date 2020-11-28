@@ -60,3 +60,23 @@ s3ls() {
 
 prompt_aws() {}
 prompt_context() {}
+
+
+# download vim plugins defined in .vim-plugins
+function install-vim-plugins() {
+  echo "installing vim plugins"
+  plugins=$HOME/.vim/pack/plugins/start
+  rm -rf $plugins
+  mkdir -p $plugins
+  pushd $plugins
+  cat $HOME/.vim-plugins | xargs -n 1 git clone
+  popd
+}
+
+# download asdf plugins defined in .tool-plugins
+function install-asdf-plugins() {
+  echo "installing asdf plugins"
+  cat $HOME/.tool-plugins | xargs -n 2 asdf plugin add
+  asdf install
+  asdf list
+}
