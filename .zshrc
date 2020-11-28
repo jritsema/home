@@ -107,7 +107,6 @@ export AWS_PROFILE=
 export AWS_PAGER=""
 
 # go
-export PATH=$PATH:/usr/local/go:/usr/local/go/bin
 #export GOPRIVATE=""
 
 # venv
