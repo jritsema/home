@@ -119,4 +119,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 # taocl
 
 # asdf-vm
-. $HOME/.asdf/asdf.sh
+asdfvm="$HOME/.asdf/asdf.sh"
+if [ -f $asdfvm ]; then
+  source $asdfvm
+fi
