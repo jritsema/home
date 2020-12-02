@@ -123,3 +123,7 @@ asdfvm="$HOME/.asdf/asdf.sh"
 if [ -f $asdfvm ]; then
   source $asdfvm
 fi
+
+# pi
+df -h
+dockerps
