@@ -4,7 +4,7 @@ nodejs https://github.com/asdf-vm/asdf-nodejs.git
 deno https://github.com/asdf-community/asdf-deno.git
 rust https://github.com/code-lever/asdf-rust.git
 yarn  https://github.com/twuni/asdf-yarn.git
-jq https://github.com/focused-labs/asdf-jq.git
+jq https://github.com/AZMCode/asdf-jq.git
 yq https://github.com/sudermanjr/asdf-yq.git
 terraform https://github.com/Banno/asdf-hashicorp.git
 terraform-docs https://github.com/looztra/asdf-terraform-docs
