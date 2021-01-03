@@ -68,7 +68,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages colorize pip python brew osx direnv)
+plugins=(git colored-man-pages colorize pip python brew osx direnv virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,12 +107,6 @@ export PATH=/usr/local/bin:$PATH
 export AWS_DEFAULT_REGION=us-east-1
 export AWS_PROFILE=
 export AWS_PAGER=""
-
-# go
-#export GOPRIVATE=""
-
-# venv
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # waypoint
 export XDG_CONFIG_HOME=$HOME/.config
