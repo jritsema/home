@@ -105,7 +105,7 @@ export PATH=/usr/local/bin:$PATH
 
 # AWS
 export AWS_DEFAULT_REGION=us-east-1
-export AWS_PROFILE=
+export AWS_PROFILE=default
 export AWS_PAGER=""
 
 # waypoint
