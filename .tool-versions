@@ -1,6 +1,6 @@
 direnv 2.25.0
 jq 1.6
-golang 1.15.5
+golang 1.16
 nodejs 14.15.1
 terraform 0.13.5
 python 3.9.1
