@@ -3,3 +3,4 @@ golang 1.16
 nodejs 14.15.1
 terraform 0.13.5
 python 3.9.1
+rust 1.50.0

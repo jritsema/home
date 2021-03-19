@@ -103,6 +103,9 @@ unset file
 
 export PATH=/usr/local/bin:$PATH
 
+# rust
+export PATH=/Users/john/.asdf/installs/rust/1.50.0/bin:$PATH
+
 # AWS
 export AWS_DEFAULT_REGION=us-east-1
 export AWS_PROFILE=default
