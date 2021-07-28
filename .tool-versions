@@ -5,3 +5,4 @@ nodejs 16.2.0
 terraform 1.0.3
 python 3.9.1
 rust 1.50.0
+aws-copilot 1.8.3
