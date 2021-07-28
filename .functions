@@ -80,3 +80,22 @@ function install-asdf-plugins() {
   asdf install
   asdf list
 }
+
+# install tmux plugins
+function install-tmux-plugins() {
+  echo "installing tmux plugins"
+  plugins=$HOME/.tmux
+  rm -rf $plugins
+  mkdir -p $plugins
+  pushd $plugins
+  cat $HOME/.tmux-plugins | xargs -n 1 git clone
+  popd
+}
+
+# install all plugins
+function install-plugins() {
+  install-vim-plugins
+  install-asdf-plugins
+  install-tmux-plugins
+}
+
