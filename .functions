@@ -99,3 +99,8 @@ function install-plugins() {
   install-tmux-plugins
 }
 
+# upgrade an asdf tool
+# usage:  asdf-upgrade golang 1.17.3
+function asdf-upgrade() {
+  asdf install $1 $2 && asdf global $1 $2
+}
