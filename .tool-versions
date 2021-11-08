@@ -3,7 +3,7 @@ jq 1.6
 golang 1.16.5
 nodejs 16.2.0
 yarn 1.22.11
-terraform 1.0.3
+terraform 1.10.0
 python 3.9.1
 rust 1.50.0
 aws-copilot 1.8.3
