@@ -13,3 +13,4 @@ pack https://github.com/johnlayton/asdf-buildpack
 kubectl https://github.com/Banno/asdf-kubectl.git
 waypoint https://github.com/Banno/asdf-hashicorp.git
 aws-copilot https://github.com/NeoHsu/asdf-copilot.git
+eksctl https://github.com/elementalvoid/asdf-eksctl.git
