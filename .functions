@@ -4,6 +4,10 @@ mcd () {
   cd $1
 }
 
+function fh() {
+  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
 random() {
   cat /dev/urandom | base64 | tr -dc '0-9a-zA-Z' | head -c15 | sed 's/$/\n/'
 }
@@ -61,6 +65,18 @@ s3ls() {
 prompt_aws() {}
 prompt_context() {}
 
+# usage: ssh-cloud9 dev
+function ssh-cloud9() {
+  instance=$(aws ec2 describe-instances --filters 'Name=tag:Name,Values=aws-cloud9-'$1'*' | jq '.Reservations[0].Instances[0].InstanceId' -r)
+  echo "ssh-ing into ${instance}"
+  aws ssm start-session --target ${instance}
+}
+
+
+###########
+# plugins #
+###########
+
 
 # download vim plugins defined in .vim-plugins
 function install-vim-plugins() {
@@ -105,6 +121,3 @@ function asdf-upgrade() {
   asdf install $1 $2 && asdf global $1 $2
 }
 
-function fh() {
-  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
-}
