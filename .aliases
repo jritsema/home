@@ -12,10 +12,10 @@ alias dockerps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{
 alias dc=docker-compose
 
 # git
-alias push='git push origin master'
-alias push-main='git push origin main'
-alias pull='git pull origin master'
-alias pull-main='git pull origin main'
+alias push='git push origin main'
+alias push-master='git push origin master'
+alias pull='git pull origin main'
+alias pull-master='git pull origin master'
 alias master='git checkout master'
 alias main='git checkout main'
 alias develop='git checkout develop'
