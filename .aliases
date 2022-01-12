@@ -33,6 +33,7 @@ alias awsaccount='aws sts get-caller-identity --query Account --output text'
 alias k=kubectl
 
 # fargate
+alias e=ecsctl
 alias f=fargate
 alias fevents='watch "fargate service info | grep -A 5 Events"'
 alias fsi="watch fargate service info"

@@ -72,11 +72,15 @@ function ssh-cloud9() {
   aws ssm start-session --target ${instance}
 }
 
+# usage: isengard account
+function isengard() {
+  isengardcli assume jritsema+$1 && isengardcli creds && s3ls 
+}
+
 
 ###########
 # plugins #
 ###########
-
 
 # download vim plugins defined in .vim-plugins
 function install-vim-plugins() {
