@@ -1,5 +1,10 @@
 # shell
-alias ll='ls -al'
+if command -v exa > /dev/null
+then
+  alias ll='exa -al'
+else
+  alias ll='ls -al'
+fi
 alias h=history
 alias searchhistory='history | fzf --tac'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
