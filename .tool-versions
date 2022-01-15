@@ -10,3 +10,4 @@ rust 1.50.0
 kubectl 1.23.0
 eksctl 0.76.0
 fzf 0.29.0
+fx 20.0.2
