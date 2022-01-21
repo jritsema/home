@@ -1,0 +1,8 @@
+brew "aws-sam-cli"
+brew "exa"
+brew "checkov"
+brew "git"
+brew "lima"
+brew "podman"
+brew "tmux"
+brew "watch"
