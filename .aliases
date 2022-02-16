@@ -33,6 +33,7 @@ alias gca='git commit -a -v --status'
 alias gimme-aws-creds='docker run -it --rm -v ~/.aws/credentials:/root/.aws/credentials -v ~/.okta_aws_login_config:/root/.okta_aws_login_config gimme-aws-creds'
 alias whoami-aws='aws sts get-caller-identity'
 alias awsaccount='aws sts get-caller-identity --query Account --output text'
+alias cdk='npx cdk'
 
 # k8s
 alias k=kubectl
