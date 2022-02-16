@@ -39,12 +39,13 @@ alias cdk='npx cdk'
 alias k=kubectl
 
 # fargate
+alias e=ecsctl
 alias f=fargate
 alias fevents='watch "fargate service info | grep -A 5 Events"'
 alias fsi="watch fargate service info"
 alias flogs="fargate service logs --start -10m -T --no-prefix -f"
 alias containers='watch "fargate service info | grep -A 4 Service"'
-alias ecrlogin='login=$(aws ecr get-login --no-include-email) && eval "$login"'
+alias ecrlogin='aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $(awsaccount).dkr.ecr.$AWS_REGION.amazonaws.com'
 
 # terraform
 alias tf='terraform'
