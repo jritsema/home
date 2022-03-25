@@ -19,6 +19,9 @@ filetype indent plugin on
 " Enable syntax highlighting
 syntax on
 
+" Enable auto-save
+autocmd TextChanged,TextChangedI * silent write
+
 
 "------------------------------------------------------------
 " Must have options {{{1
