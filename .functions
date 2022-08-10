@@ -106,9 +106,8 @@ function ssh-cloud9() {
 
 # usage: isengard account
 function isengard() {
-  isengardcli assume jritsema+$1 && isengardcli creds && s3ls && whoami-aws
+  isengardcli assume jritsema+$1 && isengardcli creds && whoami-aws
 }
-
 
 ###########
 # plugins #
