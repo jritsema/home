@@ -163,6 +163,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+set shell=/usr/bin/zsh
+
 
 """""""""""
 " plugins
