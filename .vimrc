@@ -22,6 +22,9 @@ syntax on
 " Enable auto-save
 autocmd TextChanged,TextChangedI * silent write
 
+" Disable swap files
+set noswapfile
+
 
 "------------------------------------------------------------
 " Must have options {{{1
