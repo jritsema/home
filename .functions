@@ -109,6 +109,12 @@ function isengard() {
   isengardcli assume jritsema+$1 && isengardcli creds && whoami-aws
 }
 
+# usage: isengard account
+function isengardauth() {
+  mwinit --aea && isengardcli assume jritsema+$1 && isengardcli creds && whoami-aws
+}
+
+
 ###########
 # plugins #
 ###########
