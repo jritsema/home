@@ -28,6 +28,7 @@ alias pull-develop='git pull origin develop'
 alias lastcommit='git l | head -1'
 alias cdr='cd $(git rev-parse --show-toplevel)'
 alias gca='git commit -a -v --status'
+alias gcan='git commit -a -v --status --no-verify'
 
 # aws
 alias gimme-aws-creds='docker run -it --rm -v ~/.aws/credentials:/root/.aws/credentials -v ~/.okta_aws_login_config:/root/.okta_aws_login_config gimme-aws-creds'
