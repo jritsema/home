@@ -109,7 +109,6 @@ function ssh-cloud9() {
 # plugins #
 ###########
 
-
 # download vim plugins defined in .vim-plugins
 function install-vim-plugins() {
   echo "installing vim plugins"
@@ -151,5 +150,10 @@ function install-plugins() {
 # usage:  asdf-upgrade golang 1.17.3
 function asdf-upgrade() {
   asdf install $1 $2 && asdf global $1 $2
+}
+
+# removes all docker images that match a string
+function remove-images-like() {
+  docker rmi $(docker images | grep $1 | awk '{print $3}')
 }
 
