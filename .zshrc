@@ -130,3 +130,4 @@ export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
 if [ -f "/usr/local/bin/isengardcli" ]; then
   eval "$(isengardcli shell-profile --keep-prompt)"
 fi
+

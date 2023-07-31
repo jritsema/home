@@ -10,6 +10,7 @@ alias searchhistory='history | fzf --tac'
 alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 alias macports='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias dirsize='du -sh * | sort -h -r'
 
 # docker
 alias dls='docker ps -a'
@@ -53,6 +54,7 @@ alias tf='terraform'
 alias tfa="terraform init && terraform apply -auto-approve=true"
 alias tfinspect='terraform state list | fzf | xargs terraform state show'
 alias tfsummary='terraform plan | grep " resource "'
+alias tffree='find /$HOME/code -name .terraform -type d -prune -exec rm -rf {} \;'
 
 # contentai
 alias contentailocal='rm ~/.contentai/config && ln -s ~/.contentai/local ~/.contentai/config && ll ~/.contentai && cat ~/.contentai/config'
@@ -69,3 +71,4 @@ alias py=python
 
 # other
 alias psql='docker run -it --rm --net host -v $PWD/:/scripts -e HOSTNAME=localhost -e PGDATABASE=postgres -e PGUSERNAME=postgres -e PGPASSWORD=example psql'
+
