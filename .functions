@@ -167,3 +167,19 @@ function remove-images-like() {
   docker rmi $(docker images | grep $1 | awk '{print $3}')
 }
 
+# creates a new python project
+function python-new() {
+  cp -R ~/code/python-template $1
+  cd $1
+  rm -rf .git
+  git init
+  git add .
+  git commit -am "from python-template"
+  make init
+  make install
+  echo ""
+  echo "new project successfully created!"
+  echo "cd $1"
+  cd -
+}
+
