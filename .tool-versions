@@ -7,7 +7,7 @@ yarn 1.22.11
 terraform 1.5.4
 terraform-docs 0.16.0
 rust 1.50.0
-kubectl 1.25.9
+kubectl 1.26.0
 eksctl 0.140.0
 fzf 0.29.0
 fx 20.0.2
