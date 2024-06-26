@@ -187,3 +187,7 @@ function python-new() {
   cd -
 }
 
+function ask() {
+  echo $1 | llm | glow
+}
+
