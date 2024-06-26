@@ -191,3 +191,7 @@ function ask() {
   echo $1 | llm | glow
 }
 
+function summarize() {
+   curl -sSL "$1" | llm -s "You are an expert document analyzer. Base your answer on only the provided data. Summarize the web page" | glow
+}
+
