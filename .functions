@@ -62,6 +62,10 @@ s3ls() {
   aws s3 ls --recursive --human-readable --summarize $1
 }
 
+s3cat() {
+  aws s3 cp s3://$1 -
+}
+
 prompt_aws() {}
 prompt_context() {}
 
