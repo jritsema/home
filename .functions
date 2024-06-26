@@ -108,6 +108,14 @@ function ssh-cloud9() {
   fi
 }
 
+function rds-sql() {
+  aws rds-data execute-statement \
+    --resource-arn ${CLUSTER_ARN} \
+    --secret-arn ${DB_SECRET} \
+    --database ${DB_NAME} \
+    --sql "$1" | jq
+}
+
 
 ###########
 # plugins #
