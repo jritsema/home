@@ -108,12 +108,16 @@ function ssh-cloud9() {
   fi
 }
 
+# usage: CLUSTER_ARN=x SECRET_ARN=x DB_NAME=x rds-sql "select * from foo"
 function rds-sql() {
+  echo $1
   aws rds-data execute-statement \
     --resource-arn ${CLUSTER_ARN} \
-    --secret-arn ${DB_SECRET} \
+    --secret-arn "${SECRET_ARN}" \
     --database ${DB_NAME} \
-    --sql "$1" | jq
+    --sql "$1"
+  echo "____"
+  echo ""
 }
 
 
@@ -176,9 +180,26 @@ function python-new() {
   rm -rf .git
   git init
   git add .
+  git defender --setup
   git commit -am "from python-template"
   make init
   make install
+  echo ""
+  echo "new project successfully created!"
+  echo "cd $1"
+  cd -
+}
+
+# creates a new terraform project
+function terraform-new() {
+  cp -R ~/code/terraform-starter $1
+  cd $1
+  rm -rf .git
+  git init
+  git add .
+  git defender --setup
+  git commit -am "from terraform-starter"
+  make init
   echo ""
   echo "new project successfully created!"
   echo "cd $1"
@@ -191,5 +212,20 @@ function ask() {
 
 function summarize() {
    curl -sSL "$1" | llm -s "You are an expert document analyzer. Base your answer on only the provided data. Summarize the web page" | glow
+}
+
+function llm-prompt() {
+  local branch=$2/$(date +"%m-%d-%H-%M-%S")
+  git checkout -b $branch
+  local model=bedrock-claude-v3-sonnet
+  echo "Invoking $model"
+  cat $1 | llm -m $model \
+    --template $2 > .temp && mv .temp $1
+  git commit -am "llm --template $2"
+  git checkout main
+  git merge $branch
+  git reset HEAD~1
+  echo ""
+  echo "Done. Changes from $branch are in working directory."
 }
 
