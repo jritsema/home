@@ -116,6 +116,7 @@ function isengard() {
 # usage: isengard account
 function isengardauth() {
   mwinit && isengardcli assume jritsema+$1 && isengardcli creds && whoami-aws
+}
 
 # usage: CLUSTER_ARN=x SECRET_ARN=x DB_NAME=x rds-sql "select * from foo"
 function rds-sql() {
