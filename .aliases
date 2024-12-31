@@ -1,7 +1,7 @@
 # shell
-if command -v exa > /dev/null
+if command -v eza > /dev/null
 then
-  alias ll='exa -al'
+  alias ll='eza -al'
 else
   alias ll='ls -al'
 fi
