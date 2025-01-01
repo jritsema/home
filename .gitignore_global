@@ -65,3 +65,9 @@ desktop.ini
 .idea
 .iml
 *.sublime-workspace
+
+##########
+# Python #
+##########
+.venv
+__pycache__
