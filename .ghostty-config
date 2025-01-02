@@ -1,0 +1,12 @@
+theme = MaterialDarker
+font-family = hack
+font-size = 15.5
+title = " "
+macos-titlebar-proxy-icon = hidden
+working-directory = /Users/john/code
+cursor-style-blink = false
+cursor-color = #ffffff
+mouse-hide-while-typing = true
+window-save-state = always
+keybind = cmd+d=new_split:down
+keybind = cmd+shift+d=new_split:right
