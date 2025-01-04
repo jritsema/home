@@ -181,7 +181,7 @@ set shell=/bin/zsh
 
 "material.vim
 "git clone git@github.com:kaicataldo/material.vim.git ~/.vim/pack/plugins/start/material.vim
-"colorscheme material
+colorscheme material
 
 "
 "NERDTree
