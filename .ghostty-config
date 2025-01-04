@@ -1,6 +1,6 @@
 theme = MaterialDarker
 font-family = hack
-font-size = 15.5
+font-size = 17
 title = " "
 macos-titlebar-proxy-icon = hidden
 working-directory = /Users/john/code
@@ -10,3 +10,7 @@ mouse-hide-while-typing = true
 window-save-state = always
 keybind = cmd+d=new_split:down
 keybind = cmd+shift+d=new_split:right
+keybind = opt+h=goto_split:left
+keybind = opt+j=goto_split:bottom
+keybind = opt+k=goto_split:top
+keybind = opt+l=goto_split:right
