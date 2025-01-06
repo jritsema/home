@@ -238,3 +238,14 @@ function llm-prompt() {
   echo ""
   echo "Done. Changes from $branch are in working directory."
 }
+
+# usage: makefile-add deploy "deploy the container"
+function makefile-add() {
+cat << EOF >> Makefile
+
+## $1: $2
+.PHONY: $1
+$1:
+	@echo "$2"
+EOF
+}
