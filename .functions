@@ -22,6 +22,10 @@ function taocl() {
 }
 
 function gittag() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: gittag 0.1.1 $commit'
+    return
+  fi
   git tag -a $1 -m "$1" $2
 }
 
@@ -173,8 +177,11 @@ function install-plugins() {
 }
 
 # upgrade an asdf tool
-# usage:  asdf-upgrade golang 1.17.3
 function asdf-upgrade() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: asdf-upgrade golang 1.17.3'
+    return
+  fi
   asdf install $1 $2 && asdf global $1 $2
 }
 
@@ -217,6 +224,11 @@ function terraform-new() {
 }
 
 function ask() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: ask "print some markdown"'
+    echo "uses glow for formatting"
+    return
+  fi
   echo $1 | llm | glow
 }
 
@@ -225,6 +237,10 @@ function summarize() {
 }
 
 function llm-prompt() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: llm-prompt README.md touchup'
+    return
+  fi
   local branch=$2/$(date +"%m-%d-%H-%M-%S")
   git checkout -b $branch
   local model=bedrock-claude-v3-sonnet
@@ -241,6 +257,10 @@ function llm-prompt() {
 
 # usage: makefile-add deploy "deploy the container"
 function makefile-add() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: makefile-add deploy "deploy the container"'
+    return
+  fi
 cat << EOF >> Makefile
 
 ## $1: $2
