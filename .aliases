@@ -15,7 +15,7 @@ alias dirsize='du -sh * | sort -h -r'
 # docker
 alias dls='docker ps -a'
 alias dockerps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
-alias dc=docker-compose
+alias dc="docker compose"
 alias linux="docker run -it -v $PWD:$PWD -w $PWD --platform linux/amd64 linux"
 
 # git
