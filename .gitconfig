@@ -16,7 +16,7 @@
 	sq = merge --squash
 	examine-commit = diff-tree --no-commit-id --name-only -r
 	tree = log --oneline --decorate --all --graph
-	pushtags = push origin master --tags
+	pushtags = push origin main --tags
 
 [init]
 	defaultBranch = main
