@@ -158,6 +158,9 @@ map Y y$
 " next search
 nnoremap <C-L> :nohl<CR><C-L>
 
+" open vertical terminal
+nnoremap <C-t> :botright vert term<CR>
+
 "------------------------------------------------------------
 
 "Smart way to move between windows
