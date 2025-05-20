@@ -12,6 +12,9 @@ services:
     command: uvx mcp-server-fetch
     build: .
 
+  aws-news:
+    image: ghcr.io/jritsema/aws-news-mcp-server
+
   aws-docs:
     command: uvx awslabs.aws-documentation-mcp-server@latest
     build: .
