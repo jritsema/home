@@ -21,6 +21,14 @@ function taocl() {
     xmlstarlet unesc | fmt -80 | iconv -t US
 }
 
+function commit() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: commit "stages all changes and commit"'
+    return
+  fi
+  git add . && git commit -am "$1"
+}
+
 function gittag() {
   if [ "$#" -eq 0 ]; then
     echo 'usage: gittag 0.1.1 $commit'
