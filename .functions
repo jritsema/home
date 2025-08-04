@@ -207,6 +207,10 @@ function python-new() {
 
 # creates a new terraform project
 function terraform-new() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: terraform-new new-app'
+    return
+  fi
   cp -R ~/code/terraform-starter $1
   cd $1
   rm -rf .git
