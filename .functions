@@ -271,3 +271,11 @@ $1:
 	@echo "$2"
 EOF
 }
+
+function qlog {
+  local timestamp=$(date +"%Y%m%d_%H%M%S")
+  local logfile="$HOME/qlog/q_chat_$timestamp.txt"
+  mkdir -p $HOME/q_chat_logs
+  script -q /dev/null $(which q) chat --trust-all-tools | tee $logfile
+  echo "Chat session saved to $logfile"
+}
