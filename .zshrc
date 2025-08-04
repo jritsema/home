@@ -114,10 +114,10 @@ export AWS_PAGER=""
 # waypoint
 export XDG_CONFIG_HOME=$HOME/.config
 
-# display random tip
-# taocl
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
-# asdf-vm
+# asdf-vm (old)
 asdfvm="$HOME/.asdf/asdf.sh"
 if [ -f $asdfvm ]; then
   source $asdfvm

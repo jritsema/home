@@ -1,5 +1,6 @@
 tap "aws/tap"
 
+brew "asdf"
 brew "tmux"
 brew "git"
 brew "lazygit"
