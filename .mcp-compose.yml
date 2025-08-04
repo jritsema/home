@@ -3,23 +3,20 @@ services:
     command: uvx mcp-server-time --local-timezone America/New_York
     build: .
 
-  memory:
-    command: npx -y @modelcontextprotocol/server-memory
-    environment:
-      MEMORY_FILE_PATH: "${HOME}/.config/mcp/memory.json"
-
   fetch:
     command: uvx mcp-server-fetch
     build: .
 
   aws-news:
     image: ghcr.io/jritsema/aws-news-mcp-server
+    labels:
+      mcp.profile: work, aws
 
   aws-docs:
     command: uvx awslabs.aws-documentation-mcp-server@latest
-    build: .
     labels:
       mcp.profile: work, aws, development
+    build: .
 
   github:
     image: ghcr.io/github/github-mcp-server
@@ -61,25 +58,111 @@ services:
     command: uvx mcp-neo4j-cypher@0.2.1
     environment:
       NEO4J_URI: bolt://${NEO4J_HOST}:7687
-      NEO4J_DATABASE: ${NEO4J_DATABASE} 
+      NEO4J_DATABASE: ${NEO4J_DATABASE}
       NEO4J_USERNAME: ${NEO4J_USERNAME}
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
     labels:
       mcp.profile: graph
-
-  cloudwatch:
-    command: uv --directory ${HOME}/code/Log-Analyzer-with-MCP/src/cw-mcp-server run server.py
-    labels:
-      mcp.profile: aws
+    build: .
 
   amazon-mcp:
     command: amzn-mcp
     environment:
       QUIP_API_TOKEN: ${QUIP_API_TOKEN}
     labels:
-      mcp.profile: work, aws, quip, productivity
+      # mcp.profile: work, aws, quip, productivity
+      mcp.profile: quip, productivity
+    build: .
 
-  terraform:
-    command: uvx awslabs.terraform-mcp-server@latest
+  strands:
+    command: uvx strands-agents-mcp-server
     labels:
-      mcp.profile: development, aws, terraform
+      mcp.profile: development, agents
+    build: .
+
+  aws-aurora-postgres:
+    command: uvx awslabs.postgres-mcp-server@latest --resource_arn ${AURORA_POSTGRES_ARN} --secret_arn ${AURORA_POSTGRES_SECRET_ARN} --database ${AURORA_POSTGRES_DATABASE} --readonly False --region ${AWS_REGION}
+    environment:
+      AURORA_POSTGRES_ARN: ${AURORA_POSTGRES_ARN}
+      AURORA_POSTGRES_SECRET_ARN: ${AURORA_POSTGRES_SECRET_ARN}
+      AURORA_POSTGRES_DATABASE: ${AURORA_POSTGRES_DATABASE}
+    labels:
+      mcp.profile: aws, development, database
+
+  playwright:
+    command: npx @playwright/mcp@latest
+    labels:
+      mcp.profile: development, work, vibe, ui
+
+  aws-core:
+    command: uvx awslabs.core-mcp-server@latest
+    labels:
+      mcp.profile: aws-mcp-servers, vibe
+    build: .
+
+  aws-cdk:
+    command: uvx awslabs.cdk-mcp-server@latest
+    environment:
+      SHELL: "/usr/bin/zsh"
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers
+    build: .
+
+  aws-pricing:
+    command: uvx awslabs.aws-pricing-mcp-server@latest
+    environment:
+      SHELL: "/usr/bin/zsh"
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers, vibe
+    build: .
+
+  aws-documentation:
+    command: uvx awslabs.aws-documentation-mcp-server@latest
+    environment:
+      SHELL: "/usr/bin/zsh"
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers, vibe
+    build: .
+
+  aws-diagram:
+    command: uvx awslabs.aws-diagram-mcp-server@latest
+    environment:
+      SHELL: "/usr/bin/zsh"
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers, vibe
+    build: .
+
+  context7:
+    command: npx -y @upstash/context7-mcp@latest
+    labels:
+      mcp.profile: experimental
+    build: .
+
+  aws-terraform:
+    command: uvx awslabs.terraform-mcp-server@latest
+    environment:
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers, development, aws, terraform, vibe
+    build: .
+
+  aws-serverless:
+    command: uvx awslabs.aws-serverless-mcp-server@latest --allow-write --allow-sensitive-data-access
+    environment:
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: aws-mcp-servers, vibe, serverless
+    build: .
+
+  aws-api:
+    command: uvx awslabs.aws-api-mcp-server@latest
+    environment:
+      AWS_REGION: us-east-1
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: work, aws, aws-mcp-servers, vibe
+    build: .

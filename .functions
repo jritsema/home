@@ -21,6 +21,14 @@ function taocl() {
     xmlstarlet unesc | fmt -80 | iconv -t US
 }
 
+function commit() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: commit "stages all changes and commit"'
+    return
+  fi
+  git add . && git commit -am "$1"
+}
+
 function gittag() {
   if [ "$#" -eq 0 ]; then
     echo 'usage: gittag 0.1.1 $commit'
@@ -209,6 +217,10 @@ function python-new() {
 
 # creates a new terraform project
 function terraform-new() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: terraform-new new-app'
+    return
+  fi
   cp -R ~/code/terraform-starter $1
   cd $1
   rm -rf .git
@@ -243,7 +255,7 @@ function llm-prompt() {
   fi
   local branch=$2/$(date +"%m-%d-%H-%M-%S")
   git checkout -b $branch
-  local model=bedrock-claude-v3.5-sonnet-v2
+  local model=bedrock-claude-sonnet-v3.7
   echo "Invoking $model"
   cat $1 | llm -m $model \
     --template $2 > .temp && mv .temp $1
@@ -268,4 +280,12 @@ cat << EOF >> Makefile
 $1:
 	@echo "$2"
 EOF
+}
+
+function qlog {
+  local timestamp=$(date +"%Y%m%d_%H%M%S")
+  local logfile="$HOME/qlog/q_chat_$timestamp.txt"
+  mkdir -p $HOME/q_chat_logs
+  script -q /dev/null $(which q) chat --trust-all-tools | tee $logfile
+  echo "Chat session saved to $logfile"
 }
