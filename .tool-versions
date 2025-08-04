@@ -11,5 +11,5 @@ eksctl 0.140.0
 fzf 0.29.0
 fx 20.0.2
 air 1.44.0
-python 3.11.9
+python 3.13.1
 uv 0.5.11
