@@ -63,6 +63,9 @@ ZSH_THEME="agnoster"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# asdf-vm
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -108,16 +111,8 @@ export AWS_DEFAULT_REGION=us-east-1
 export AWS_REGION=us-east-1
 export AWS_PAGER=""
 
-# waypoint
-export XDG_CONFIG_HOME=$HOME/.config
 
-# asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
-# asdf-vm (old)
-asdfvm="$HOME/.asdf/asdf.sh"
-if [ -f $asdfvm ]; then
-  source $asdfvm
 fi
 
 # java
