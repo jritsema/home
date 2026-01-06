@@ -14,5 +14,6 @@ keybind = opt+h=goto_split:left
 keybind = opt+j=goto_split:bottom
 keybind = opt+k=goto_split:top
 keybind = opt+l=goto_split:right
+keybind = cmd+r=prompt_surface_title
 confirm-close-surface = false
 window-padding-x = 20

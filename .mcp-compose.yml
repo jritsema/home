@@ -6,17 +6,25 @@ services:
   fetch:
     command: uvx mcp-server-fetch
     build: .
+    labels:
+      mcp.profile: fetch
 
   aws-news:
     image: ghcr.io/jritsema/aws-news-mcp-server
     labels:
-      mcp.profile: work, aws
+      mcp.profile: work, aws, news
+
+  # aws-docs:
+  #   command: uvx awslabs.aws-documentation-mcp-server@latest
+  #   labels:
+  #     mcp.profile: work, aws, development
+  #   build: .
+  #
 
   aws-docs:
-    command: uvx awslabs.aws-documentation-mcp-server@latest
+    command: https://knowledge-mcp.global.api.aws
     labels:
-      mcp.profile: work, aws, development
-    build: .
+      mcp.profile: work, aws, development, aws-docs, remote
 
   github:
     image: ghcr.io/github/github-mcp-server
@@ -39,6 +47,19 @@ services:
       mcp.profile: productivity
     build: .
 
+  # Access to the macOS calendar database using Objective-C EventKit APIs
+  calendar:
+    command: uv --directory ${HOME}/code/mcp-ical run mcp-ical
+    labels:
+      mcp.profile: productivity, calendar
+    build: .
+
+  # Access to Outlook
+  outlook:
+    command: aws-outlook-mcp
+    labels:
+      mcp.profile: productivity, calendar, email
+
   obsidian:
     command: uvx mcp-obsidian ${HOME}/${OBSIDIAN_NOTES_PATH}
     environment:
@@ -52,7 +73,7 @@ services:
     environment:
       BRAVE_API_KEY: ${BRAVE_API_KEY}
     labels:
-      mcp.profile: default, development, research, search
+      mcp.profile: development, research, search
 
   neo4j:
     command: uvx mcp-neo4j-cypher@0.2.1
@@ -63,15 +84,6 @@ services:
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
     labels:
       mcp.profile: graph
-    build: .
-
-  amazon-mcp:
-    command: amzn-mcp
-    environment:
-      QUIP_API_TOKEN: ${QUIP_API_TOKEN}
-    labels:
-      # mcp.profile: work, aws, quip, productivity
-      mcp.profile: quip, productivity
     build: .
 
   strands:
@@ -142,13 +154,10 @@ services:
       mcp.profile: experimental
     build: .
 
-  aws-terraform:
-    command: uvx awslabs.terraform-mcp-server@latest
-    environment:
-      FASTMCP_LOG_LEVEL: "ERROR"
+  terraform:
+    image: hashicorp/terraform-mcp-server:0.3.0
     labels:
-      mcp.profile: aws-mcp-servers, development, aws, terraform, vibe
-    build: .
+      mcp.profile: development, aws, terraform, vibe, agentcore
 
   aws-serverless:
     command: uvx awslabs.aws-serverless-mcp-server@latest --allow-write --allow-sensitive-data-access
@@ -165,4 +174,12 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: work, aws, aws-mcp-servers, vibe
+    build: .
+
+  agentcore:
+    command: uvx awslabs.amazon-bedrock-agentcore-mcp-server@latest
+    environment:
+      FASTMCP_LOG_LEVEL: "ERROR"
+    labels:
+      mcp.profile: agentcore
     build: .
