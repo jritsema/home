@@ -111,9 +111,5 @@ export AWS_DEFAULT_REGION=us-east-1
 export AWS_REGION=us-east-1
 export AWS_PAGER=""
 
-
-
-fi
-
 # java
 export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
