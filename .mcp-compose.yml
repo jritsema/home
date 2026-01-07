@@ -183,3 +183,10 @@ services:
     labels:
       mcp.profile: agentcore
     build: .
+
+  homeseer:
+    image: homeseer-mcp-server
+    environment:
+      HOMESEER_ENDPOINT: http://homeseer.ritsema.me
+    labels:
+      mcp.profile: home, homeseer, homeautomation
