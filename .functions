@@ -293,3 +293,27 @@ function klog {
   script -q /dev/null $(which kiro-cli) chat --trust-all-tools | tee $logfile
   echo "Chat session saved to $logfile"
 }
+
+# removes exif metadata from all jpg files in directory
+function et-rm() {
+  if [ "$#" -eq 0 ]; then
+    echo 'usage: et-rm /Volumes/photos/2025/01'
+    return
+  fi
+
+  # Check if JPG files exist
+  if ls $1/*.JPG &> /dev/null; then
+    echo "Processing .JPG files..."
+    exiftool $1/*.JPG -xmp:all= -overwrite_original
+  else
+    echo "No .JPG files found in $1"
+  fi
+
+  # Check if jpg files exist
+  if ls $1/*.jpg &> /dev/null; then
+    echo "Processing .jpg files..."
+    exiftool $1/*.jpg -xmp:all= -overwrite_original
+  else
+    echo "No .jpg files found in $1"
+  fi
+}
