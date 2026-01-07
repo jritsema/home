@@ -3,7 +3,7 @@ jq 1.6
 golang 1.23.0
 nodejs 23.11.0
 yarn 1.22.11
-terraform 1.9.8
+terraform 1.14.3
 terraform-docs 0.16.0
 rust 1.83.0
 kubectl 1.26.0
