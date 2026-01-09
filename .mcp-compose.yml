@@ -1,72 +1,21 @@
 services:
+
+  ###########################################################
+  # General
+  ###########################################################
+
   time:
     command: uvx mcp-server-time --local-timezone America/New_York
     build: .
+    labels:
+      mcp.description: Provides current time and timezone utilities. Use for getting current time in specific timezones and converting time between timezones.
 
   fetch:
     command: uvx mcp-server-fetch
     build: .
     labels:
       mcp.profile: fetch
-
-  aws-news:
-    image: ghcr.io/jritsema/aws-news-mcp-server
-    labels:
-      mcp.profile: work, aws, news
-
-  # aws-docs:
-  #   command: uvx awslabs.aws-documentation-mcp-server@latest
-  #   labels:
-  #     mcp.profile: work, aws, development
-  #   build: .
-  #
-
-  aws-docs:
-    command: https://knowledge-mcp.global.api.aws
-    labels:
-      mcp.profile: work, aws, development, aws-docs, remote
-
-  github:
-    image: ghcr.io/github/github-mcp-server
-    environment:
-      GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_PERSONAL_ACCESS_TOKEN}
-    labels:
-      mcp.profile: development
-
-  postgres:
-    command: uvx --from mcp-alchemy==2025.04.16.110003 --with psycopg2-binary --refresh-package mcp-alchemy mcp-alchemy
-    environment:
-      DB_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/postgres"
-    labels:
-      mcp.profile: postgres
-    build: .
-
-  applescript-mcp-server:
-    command: node ${HOME}/code/applescript-mcp/dist/index.js
-    labels:
-      mcp.profile: productivity
-    build: .
-
-  # Access to the macOS calendar database using Objective-C EventKit APIs
-  calendar:
-    command: uv --directory ${HOME}/code/mcp-ical run mcp-ical
-    labels:
-      mcp.profile: productivity, calendar
-    build: .
-
-  # Access to Outlook
-  outlook:
-    command: aws-outlook-mcp
-    labels:
-      mcp.profile: productivity, calendar, email
-
-  obsidian:
-    command: uvx mcp-obsidian ${HOME}/${OBSIDIAN_NOTES_PATH}
-    environment:
-      OBSIDIAN_API_KEY: ${OBSIDIAN_API_KEY}
-    labels:
-      mcp.profile: work, productivity, research, search
-    build: .
+      mcp.description: Fetches content from URLs and converts to markdown. Use for accessing web content, APIs, and extracting information from websites.
 
   brave:
     image: mcp/brave-search
@@ -74,6 +23,71 @@ services:
       BRAVE_API_KEY: ${BRAVE_API_KEY}
     labels:
       mcp.profile: development, research, search
+      mcp.description: Brave Search API for comprehensive web searches, local business discovery, and real-time information retrieval. Use for general web searches, finding recent information, locating businesses/places, news searches, and accessing current web content when other sources are insufficient.
+
+  ###########################################################
+  # Productivity
+  ###########################################################
+
+  applescript-mcp-server:
+    command: node ${HOME}/code/applescript-mcp/dist/index.js
+    labels:
+      mcp.profile: productivity
+      mcp.description: Comprehensive macOS automation with 35+ tools for system control, app management, calendar, finder, clipboard, notifications, iTerm, mail, pages, shortcuts, messages, and notes. Use for complete macOS desktop automation and productivity workflows.
+    build: .
+
+  # Access to the macOS calendar database using Objective-C EventKit APIs
+  calendar:
+    command: uv --directory ${HOME}/code/mcp-ical run mcp-ical
+    labels:
+      mcp.profile: productivity, calendar
+      mcp.description: Full-featured macOS calendar management using EventKit APIs. Use for listing calendars, viewing events in date ranges, creating new events with recurrence/reminders, and updating existing events. Supports all calendar features including location, notes, and complex recurrence rules.
+    build: .
+
+  # Access to Outlook at AWS
+  outlook:
+    command: aws-outlook-mcp
+    labels:
+      mcp.profile: productivity, calendar, email
+      mcp.description: Complete Microsoft Outlook integration with 18 tools for comprehensive email management (read, send, reply, forward, search, folders, drafts, attachments, contacts) and full calendar operations (meetings, availability, room booking, shared calendars). Use for all Outlook email and calendar workflows.
+
+  obsidian:
+    command: uvx mcp-obsidian ${HOME}/${OBSIDIAN_NOTES_PATH}
+    environment:
+      OBSIDIAN_API_KEY: ${OBSIDIAN_API_KEY}
+    labels:
+      mcp.profile: work, productivity, research, search
+      mcp.description: Comprehensive Obsidian vault access for note management, knowledge base operations, and markdown content manipulation. Use for searching notes, reading/writing markdown files, managing knowledge graphs, linking notes, and organizing research materials in Obsidian vaults.
+    build: .
+
+  homeseer:
+    image: homeseer-mcp-server
+    environment:
+      HOMESEER_ENDPOINT: http://homeseer.ritsema.me
+    labels:
+      mcp.profile: home, homeseer, homeautomation
+      mcp.description: HomeSeer home automation system integration for smart home device control, sensor data reading, automation scenario management, and home monitoring. Use for controlling lights, thermostats, security systems, reading sensor values, and managing home automation workflows.
+
+  ###########################################################
+  # Software development
+  ###########################################################
+
+  github:
+    image: ghcr.io/github/github-mcp-server
+    environment:
+      GITHUB_PERSONAL_ACCESS_TOKEN: ${GITHUB_PERSONAL_ACCESS_TOKEN}
+    labels:
+      mcp.profile: development
+      mcp.description: Complete GitHub API access for comprehensive repository management, issue tracking, pull request operations, code search, branch management, release management, and GitHub Actions workflow control. Use for all GitHub operations including repository CRUD, collaboration workflows, and code management.
+
+  postgres:
+    command: uvx --from mcp-alchemy==2025.04.16.110003 --with psycopg2-binary --refresh-package mcp-alchemy mcp-alchemy
+    environment:
+      DB_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/postgres"
+    labels:
+      mcp.profile: postgres
+      mcp.description: PostgreSQL database operations with SQL query execution, schema inspection, table management, and data analysis. Use for database administration, data queries, schema exploration, and PostgreSQL-specific operations on local instances.
+    build: .
 
   neo4j:
     command: uvx mcp-neo4j-cypher@0.2.1
@@ -84,13 +98,38 @@ services:
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
     labels:
       mcp.profile: graph
+      mcp.description: Neo4j graph database operations with Cypher query execution, graph data analysis, relationship queries, node management, and graph-based data exploration. Use for graph database management, complex relationship analysis, pattern matching, and graph data visualization.
     build: .
 
   strands:
     command: uvx strands-agents-mcp-server
     labels:
       mcp.profile: development, agents
+      mcp.description: Strands Agents documentation search and retrieval. Use for accessing comprehensive documentation on agent concepts, model providers, multi-agent patterns, tools, deployment guides, and API references. Essential for Strands Agents development and implementation.
     build: .
+
+  context7:
+    command: npx -y @upstash/context7-mcp@latest
+    labels:
+      mcp.profile: experimental
+      mcp.description: Context7 documentation and code example access with 2 tools for resolving library IDs and querying up-to-date documentation/code examples from any programming library or framework. Use for accessing current documentation and code samples for development libraries.
+    build: .
+
+  terraform:
+    image: hashicorp/terraform-mcp-server:0.3.0
+    labels:
+      mcp.profile: development, aws, terraform, vibe, agentcore
+      mcp.description: Comprehensive Terraform registry access with 8 tools for searching and retrieving module details, provider documentation, policy information, and version management. Use for Terraform module discovery, provider documentation, and infrastructure as code development.
+
+  ###########################################################
+  # AWS
+  ###########################################################
+
+  aws-news:
+    image: ghcr.io/jritsema/aws-news-mcp-server
+    labels:
+      mcp.profile: work, aws, news
+      mcp.description: Provides AWS news, announcements, and service updates. Use for staying current with AWS releases, features, and industry news.
 
   aws-aurora-postgres:
     command: uvx awslabs.postgres-mcp-server@latest --resource_arn ${AURORA_POSTGRES_ARN} --secret_arn ${AURORA_POSTGRES_SECRET_ARN} --database ${AURORA_POSTGRES_DATABASE} --readonly False --region ${AWS_REGION}
@@ -100,17 +139,7 @@ services:
       AURORA_POSTGRES_DATABASE: ${AURORA_POSTGRES_DATABASE}
     labels:
       mcp.profile: aws, development, database
-
-  playwright:
-    command: npx @playwright/mcp@latest
-    labels:
-      mcp.profile: development, work, vibe, ui
-
-  aws-core:
-    command: uvx awslabs.core-mcp-server@latest
-    labels:
-      mcp.profile: aws-mcp-servers, vibe
-    build: .
+      mcp.description: AWS Aurora PostgreSQL serverless database operations via RDS Data API with SQL query execution, schema management, and data analysis. Use for cloud database queries, serverless database management, and Aurora-specific operations without direct database connections.
 
   aws-cdk:
     command: uvx awslabs.cdk-mcp-server@latest
@@ -119,6 +148,7 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: aws-mcp-servers
+      mcp.description: Comprehensive AWS CDK development support with 7 tools for CDK guidance, CDK Nag security rule explanations, Solutions Constructs patterns, GenAI constructs search, Bedrock schema generation, and Lambda layer documentation. Use for CDK best practices and advanced development workflows.
     build: .
 
   aws-pricing:
@@ -128,16 +158,14 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: aws-mcp-servers, vibe
+      mcp.description: Comprehensive AWS pricing analysis with 8 tools for detailed cost analysis, CDK/Terraform project cost estimation, service pricing discovery with advanced filtering, cost report generation, Bedrock patterns, and bulk pricing data access. Use for cost optimization, pricing research, and financial planning.
     build: .
 
-  aws-documentation:
-    command: uvx awslabs.aws-documentation-mcp-server@latest
-    environment:
-      SHELL: "/usr/bin/zsh"
-      FASTMCP_LOG_LEVEL: "ERROR"
+  aws-docs:
+    command: https://knowledge-mcp.global.api.aws
     labels:
-      mcp.profile: aws-mcp-servers, vibe
-    build: .
+      mcp.profile: work, aws, development, aws-docs, remote
+      mcp.description: Comprehensive AWS documentation search and access with regional availability checking. Use for searching AWS docs, reading documentation pages, checking service availability across regions, and getting content recommendations. Primary source for current AWS information.
 
   aws-diagram:
     command: uvx awslabs.aws-diagram-mcp-server@latest
@@ -146,18 +174,8 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: aws-mcp-servers, vibe
+      mcp.description: AWS architecture diagram generation with 3 tools for creating PNG diagrams from Python code, accessing diagram examples (AWS, sequence, flow, class, k8s, onprem, custom), and discovering available icons by provider/service. Use for visualizing AWS architectures and creating technical diagrams.
     build: .
-
-  context7:
-    command: npx -y @upstash/context7-mcp@latest
-    labels:
-      mcp.profile: experimental
-    build: .
-
-  terraform:
-    image: hashicorp/terraform-mcp-server:0.3.0
-    labels:
-      mcp.profile: development, aws, terraform, vibe, agentcore
 
   aws-serverless:
     command: uvx awslabs.aws-serverless-mcp-server@latest --allow-write --allow-sensitive-data-access
@@ -165,6 +183,7 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: aws-mcp-servers, vibe, serverless
+      mcp.description: Comprehensive AWS serverless development with 25 tools for SAM operations (init, build, deploy, local invoke, logs), Lambda guidance and event schemas, webapp deployment with custom domains, EventBridge schema management, event source mapping optimization, metrics monitoring, and security policy generation. Use for complete serverless application lifecycle management.
     build: .
 
   aws-api:
@@ -174,19 +193,21 @@ services:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: work, aws, aws-mcp-servers, vibe
+      mcp.description: Direct AWS CLI execution with 2 tools for natural language to AWS CLI command suggestions and validated AWS CLI command execution. Use for comprehensive AWS resource management, service operations, and API calls across all AWS services with intelligent command discovery.
     build: .
 
-  agentcore:
+  aws-remote-mcp:
+    command: uvx mcp-proxy-for-aws@latest https://aws-mcp.${AWS_REGION}.api.aws/mcp --metadata AWS_REGION=${AWS_REGION}
+    labels:
+      mcp.profile: aws
+      mcp.description: Remote AWS all-in-one MCP server that combines real-time AWS documentation, API calls, and pre-built Agent SOPs for complex multi-step workflows like infrastructure provisioning, troubleshooting, and cost management following AWS best practices.
+    build: .
+
+  aws-agentcore:
     command: uvx awslabs.amazon-bedrock-agentcore-mcp-server@latest
     environment:
       FASTMCP_LOG_LEVEL: "ERROR"
     labels:
       mcp.profile: agentcore
+      mcp.description: Amazon Bedrock AgentCore platform documentation and management with 5 tools for searching AgentCore docs, fetching full documentation, and managing AgentCore Runtime, Memory, and Gateway services. Use for AgentCore development, deployment, and platform management guidance.
     build: .
-
-  homeseer:
-    image: homeseer-mcp-server
-    environment:
-      HOMESEER_ENDPOINT: http://homeseer.ritsema.me
-    labels:
-      mcp.profile: home, homeseer, homeautomation
