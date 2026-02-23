@@ -190,7 +190,7 @@ function asdf-upgrade() {
     echo 'usage: asdf-upgrade golang 1.17.3'
     return
   fi
-  asdf install $1 $2 && asdf global $1 $2
+  asdf install $1 $2 && asdf set --home $1 $2
 }
 
 # removes all docker images that match a string
