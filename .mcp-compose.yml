@@ -60,6 +60,7 @@ services:
       mcp.description: Comprehensive Obsidian vault access for note management, knowledge base operations, and markdown content manipulation. Use for searching notes, reading/writing markdown files, managing knowledge graphs, linking notes, and organizing research materials in Obsidian vaults.
     build: .
 
+    command: uvx --refresh ha-mcp@latest
   homeseer:
     image: homeseer-mcp-server
     environment:
