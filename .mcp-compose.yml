@@ -9,6 +9,7 @@ services:
     build: .
     labels:
       mcp.description: Provides current time and timezone utilities. Use for getting current time in specific timezones and converting time between timezones.
+      mcp.profile: time
 
   fetch:
     command: uvx mcp-server-fetch
@@ -40,7 +41,7 @@ services:
   calendar:
     command: uv --directory ${HOME}/code/mcp-ical run mcp-ical
     labels:
-      mcp.profile: productivity, calendar
+      mcp.profile: productivity, calendar, applecalendar
       mcp.description: Full-featured macOS calendar management using EventKit APIs. Use for listing calendars, viewing events in date ranges, creating new events with recurrence/reminders, and updating existing events. Supports all calendar features including location, notes, and complex recurrence rules.
     build: .
 
@@ -60,13 +61,28 @@ services:
       mcp.description: Comprehensive Obsidian vault access for note management, knowledge base operations, and markdown content manipulation. Use for searching notes, reading/writing markdown files, managing knowledge graphs, linking notes, and organizing research materials in Obsidian vaults.
     build: .
 
+  homeassistant:
+    command: ${HOMEASSISTANT_ENDPOINT}/api/mcp
+    labels:
+      mcp.description: The remote MCP server built-in to Home Assistant
+      mcp.profile: home, homeautomation, homeassistant, hass
+      mcp.header.Authorization: Bearer ${HOMEASSISTANT_ACCESS_TOKEN}
+
+  ha-mcp:
     command: uvx --refresh ha-mcp@latest
+    environment:
+      HOMEASSISTANT_URL: ${HOMEASSISTANT_ENDPOINT}
+      HOMEASSISTANT_TOKEN: ${HOMEASSISTANT_ACCESS_TOKEN}
+    labels:
+      mcp.description: A comprehensive MCP server that enables AI assistants to interact with Home Assistant. Using natural language, control smart home devices, query states, execute services and manage your automations.
+      mcp.profile: home, homeautomation, homeassistant, hass, ha-mcp
+
   homeseer:
     image: homeseer-mcp-server
     environment:
-      HOMESEER_ENDPOINT: http://homeseer.ritsema.me
+      HOMESEER_ENDPOINT: ${HOMESEER_ENDPOINT}
     labels:
-      mcp.profile: home, homeseer, homeautomation
+      mcp.profile: home, homeautomation, homeseer
       mcp.description: HomeSeer home automation system integration for smart home device control, sensor data reading, automation scenario management, and home monitoring. Use for controlling lights, thermostats, security systems, reading sensor values, and managing home automation workflows.
 
   ###########################################################
