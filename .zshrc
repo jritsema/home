@@ -1,5 +1,7 @@
+
 # Kiro CLI pre block. Keep at the top of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
+
 ZSH_DISABLE_COMPFIX=true
 
 # Path to your oh-my-zsh installation.
@@ -129,5 +131,18 @@ export PATH=$HOME/.toolbox/bin:$PATH
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)" || true
 
+
+# Added by smithy-mcp
+export PATH="/Users/jritsema/.config/smithy-mcp/mcp-servers:$PATH"
+
+
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+
+# Added by AIM CLI
+export PATH="$HOME/.aim/mcp-servers:$PATH"
+
+# MeshClaw
+export PATH="$HOME/.local/bin:$PATH"
+export MESHCLAW_PROJECT_DIR="/Users/jritsema/.meshclaw-app"
+eval "$(/opt/homebrew/bin/brew shellenv)"
