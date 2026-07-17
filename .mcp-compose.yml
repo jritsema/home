@@ -133,7 +133,7 @@ services:
     build: .
 
   terraform:
-    image: hashicorp/terraform-mcp-server:0.3.0
+    image: hashicorp/terraform-mcp-server:1.0.0
     labels:
       mcp.profile: development, aws, terraform, vibe, agentcore
       mcp.description: Comprehensive Terraform registry access with 8 tools for searching and retrieving module details, provider documentation, policy information, and version management. Use for Terraform module discovery, provider documentation, and infrastructure as code development.
@@ -178,12 +178,6 @@ services:
       mcp.description: Comprehensive AWS pricing analysis with 8 tools for detailed cost analysis, CDK/Terraform project cost estimation, service pricing discovery with advanced filtering, cost report generation, Bedrock patterns, and bulk pricing data access. Use for cost optimization, pricing research, and financial planning.
     build: .
 
-  aws-docs:
-    command: https://knowledge-mcp.global.api.aws
-    labels:
-      mcp.profile: work, aws, development, aws-docs, remote
-      mcp.description: Comprehensive AWS documentation search and access with regional availability checking. Use for searching AWS docs, reading documentation pages, checking service availability across regions, and getting content recommendations. Primary source for current AWS information.
-
   aws-diagram:
     command: uvx awslabs.aws-diagram-mcp-server@latest
     environment:
@@ -213,11 +207,11 @@ services:
       mcp.description: Direct AWS CLI execution with 2 tools for natural language to AWS CLI command suggestions and validated AWS CLI command execution. Use for comprehensive AWS resource management, service operations, and API calls across all AWS services with intelligent command discovery.
     build: .
 
-  aws-remote-mcp:
+  aws-remote:
     command: uvx mcp-proxy-for-aws@latest https://aws-mcp.${AWS_REGION}.api.aws/mcp --metadata AWS_REGION=${AWS_REGION}
     labels:
-      mcp.profile: aws
-      mcp.description: Remote AWS all-in-one MCP server that combines real-time AWS documentation, API calls, and pre-built Agent SOPs for complex multi-step workflows like infrastructure provisioning, troubleshooting, and cost management following AWS best practices.
+      mcp.profile: aws, aws-remote, aws-mcp
+      mcp.description: Official remote AWS all-in-one MCP server that combines real-time AWS documentation, API calls, and pre-built Agent SOPs for complex multi-step workflows like infrastructure provisioning, troubleshooting, and cost management following AWS best practices.
     build: .
 
   aws-agentcore:
