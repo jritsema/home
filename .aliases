@@ -74,3 +74,11 @@ alias venvfree='find /$HOME/code -name .venv -type d -prune -exec rm -rf {} \;'
 # other
 alias psql='docker run -it --rm --net host -v $PWD/:/scripts -e HOSTNAME=localhost -e PGDATABASE=postgres -e PGUSERNAME=postgres -e PGPASSWORD=example psql'
 
+# kiro
+alias kcli='kiro-cli'
+alias yolo="kiro-cli chat -a"
+
+alias agc="agentcore"
+
+alias clearbell="unsetopt BEEP"
+
