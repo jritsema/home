@@ -177,11 +177,46 @@ function install-tmux-plugins() {
   popd
 }
 
+# install agent skills defined in .skills
+function install-skills() {
+  echo "installing agent skills"
+
+  if [[ ! -f "$HOME/.skills" ]]; then
+    echo "missing $HOME/.skills"
+    return 1
+  fi
+
+  if ! command -v npx > /dev/null; then
+    echo "npx is required to install agent skills"
+    return 1
+  fi
+
+  local configured_agents="${SKILL_AGENTS:-kiro-cli}"
+  local skill repo agent
+  local -a agent_args
+
+  for agent in ${(z)configured_agents}; do
+    agent_args+=(--agent "$agent")
+  done
+
+  while read -r skill repo; do
+    [[ -z "$skill" || "$skill" == \#* ]] && continue
+
+    DISABLE_TELEMETRY=1 npx -y skills@1.5.19 add "$repo" \
+      --full-depth \
+      --skill "$skill" \
+      --global \
+      "${agent_args[@]}" \
+      --yes < /dev/null
+  done < "$HOME/.skills"
+}
+
 # install all plugins
 function install-plugins() {
   install-vim-plugins
   install-asdf-plugins
   install-tmux-plugins
+  install-skills
 }
 
 # upgrade an asdf tool
