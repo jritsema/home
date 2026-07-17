@@ -222,3 +222,33 @@ services:
       mcp.profile: agentcore
       mcp.description: Amazon Bedrock AgentCore platform documentation and management with 5 tools for searching AgentCore docs, fetching full documentation, and managing AgentCore Runtime, Memory, and Gateway services. Use for AgentCore development, deployment, and platform management guidance.
     build: .
+
+  aws-slack:
+    command: workplace-chat-mcp
+    labels:
+      mcp.profile: slack
+      mcp.description: access the aws internal slack
+
+  amazon-internal:
+    command: builder-mcp --include-tools=ReadInternalWebsites,InternalSearch
+    labels:
+      mcp.profile: amazon
+      mcp.description: access internal amazon resources like knowledge bases and wikis
+
+  ###########################################################
+  # Specialist / SpecReq
+  ###########################################################
+
+  specialist-super-agent-mcp:
+    command: specialist-super-agent-mcp
+    labels:
+      mcp.profile: work, specialist
+      mcp.description: AWS Specialist Agent for complex AWS questions requiring deep analysis, multi-step reasoning, specialist playbooks, or conversation continuity.
+    build: .
+
+  spec-req-mcp:
+    command: spec-req-mcp
+    labels:
+      mcp.profile: work, specialist
+      mcp.description: SpecReq request management for creating, searching, completing, and managing specialist requests.
+    build: .
